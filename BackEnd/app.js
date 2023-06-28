@@ -9,8 +9,8 @@ const path = require("path");
 
 app.use(
   cors({
-    // origin: "https://fullstack-ecommerce.netlify.app"
-    origin: "http://localhost:3000",
+    origin: "https://fullstack-ecommerce.netlify.app",
+    // origin: "http://localhost:3000",
     credentials: true,
   })
 );
@@ -46,6 +46,7 @@ const user = require("./controller/user");
 const shop = require("./controller/shop");
 const product = require("./controller/product");
 const event = require("./controller/event");
+// const coupon = require("./controller/couponCode");
 const coupon = require("./controller/couponCode");
 const payment = require("./controller/payment");
 const order = require("./controller/order");
