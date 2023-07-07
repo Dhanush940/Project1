@@ -10,7 +10,14 @@ const EventsPage = () => {
     <>
       <div>
         <Header activeHeading={4} />
-        <EventCard data={allEvents && allEvents[0]} active={true} />
+
+        {allEvents ? (
+          <EventCard data={allEvents && allEvents[0]} active={true} />
+        ) : (
+          <div style={"display:flex;justify-content:center;align-items:center"}>
+            No Events Present
+          </div>
+        )}
       </div>
     </>
   );

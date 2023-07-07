@@ -23,7 +23,7 @@ const AdminHeader = () => {
       </div>
       <div className="flex items-center">
         <div className="flex items-center mr-4">
-          <Link to="/dashboard-coupouns" className="800px:block hidden">
+          <Link to="/admin-dashboard" className="800px:block hidden">
             <RxDashboard
               color="#555"
               size={30}
