@@ -3,13 +3,13 @@ const path = require("path");
 const User = require("../model/user");
 const router = express.Router();
 const { upload } = require("../multer");
-const ErrorHandler = require("../utils/ErrorHandler");
-const catchAsyncErrors = require("../middleware/catchAsyncErrors");
+const ErrorHandler = require("../BackEnd/utils/ErrorHandler");
+const catchAsyncErrors = require("../BackEnd/middleware/catchAsyncErrors");
 const fs = require("fs");
 const jwt = require("jsonwebtoken");
 const sendMail = require("../utils/sendMail");
 const sendJWTToken = require("../utils/sendJWTToken");
-const { isAuthenticated, isAdmin } = require("../middleware/auth");
+const { isAuthenticated, isAdmin } = require("../BackEnd/middleware/auth");
 
 router.post("/create-user", upload.single("file"), async (req, res, next) => {
   try {
@@ -180,6 +180,7 @@ router.get(
         httpOnly: true,
         domain: "ecommerce-backend-9nv3.onrender.com",
         path: "/",
+        sameSite: "none",
       });
       res.status(201).json({
         success: true,
