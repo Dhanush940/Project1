@@ -1,5 +1,5 @@
 import React from "react";
-import { FiShoppingBag } from "react-icons/fi";
+import { FiPackage, FiShoppingBag } from "react-icons/fi";
 import { GrWorkshop } from "react-icons/gr";
 import { RxDashboard } from "react-icons/rx";
 import { CiMoneyBill, CiSettings } from "react-icons/ci";
@@ -79,7 +79,7 @@ const AdminSideBar = ({ active }) => {
 
       <div className="w-full flex items-center p-4">
         <Link to="/admin-products" className="w-full flex items-center">
-          <BsHandbag size={30} color={`${active === 5 ? "crimson" : "#555"}`} />
+          <FiPackage size={30} color={`${active === 5 ? "crimson" : "#555"}`} />
           <h5
             className={`hidden 800px:block pl-2 text-[18px] font-[400] ${
               active === 5 ? "text-[crimson]" : "text-[#555]"
