@@ -80,15 +80,20 @@ const AllEvents = () => {
     });
 
   return (
-    <div className="w-full mx-8 pt-1 mt-10 bg-white">
-      <DataGrid
-        rows={row}
-        columns={columns}
-        pageSize={10}
-        disableSelectionOnClick
-        autoHeight
-      />
-    </div>
+    <>
+      <div className="w-full flex flex-col">
+        <h3 className="text-[22px] font-Poppins pb-2 mt-3 ml-4">All Events</h3>
+        <div className="w-full mx-5 pt-1 mt-3 bg-white">
+          <DataGrid
+            rows={row}
+            columns={columns}
+            pageSize={10}
+            disableSelectionOnClick
+            autoHeight
+          />
+        </div>
+      </div>
+    </>
   );
 };
 

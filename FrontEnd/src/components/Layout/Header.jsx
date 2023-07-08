@@ -46,7 +46,7 @@ const Header = ({ activeHeading }) => {
   };
 
   window.addEventListener("scroll", () => {
-    if (window.scrollY > 70) {
+    if (window.scrollY > 140) {
       setActive(true);
     } else {
       setActive(false);
@@ -276,25 +276,23 @@ const Header = ({ activeHeading }) => {
                   value={searchTerm}
                   onChange={handleSearchChange}
                 />
-                {searchData && (
+                {searchData?.length > 0 && (
                   <div className="absolute bg-[#fff] z-10 shadow w-full left-0 p-3">
-                    {searchData.map((i) => {
-                      const d = i.name;
-
-                      const Product_name = d.replace(/\s+/g, "-");
-                      return (
-                        <Link to={`/product/${Product_name}`}>
-                          <div className="flex items-center">
-                            <img
-                              src={i.image_Url[0].url}
-                              alt=""
-                              className="w-[50px] mr-2"
-                            />
-                            <h5>{i.name}</h5>
-                          </div>
-                        </Link>
-                      );
-                    })}
+                    {searchData &&
+                      searchData.map((i, index) => {
+                        return (
+                          <Link to={`/product/${i._id}`}>
+                            <div className="w-full flex items-start-py-3">
+                              <img
+                                src={`${backend_url}${i.images[0]}`}
+                                alt=""
+                                className="w-[40px] h-[40px] mr-[10px]"
+                              />
+                              <h1>{i.name}</h1>
+                            </div>
+                          </Link>
+                        );
+                      })}
                   </div>
                 )}
               </div>

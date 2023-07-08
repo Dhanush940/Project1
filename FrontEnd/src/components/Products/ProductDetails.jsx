@@ -330,8 +330,8 @@ const ProductDetailsInfo = ({
             ))}
 
           <div className="w-full flex justify-center">
-            {data && data.reviews?.length === 0 && (
-              <h5>No Reviews have for this product!</h5>
+            {data && !data.reviews && (
+              <h5>No reviews present for this product!</h5>
             )}
           </div>
         </div>

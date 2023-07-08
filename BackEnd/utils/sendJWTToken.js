@@ -9,7 +9,7 @@ const sendJWTToken = (user, statusCode, res) => {
     httpOnly: true,
     sameSite: "none",
     secure: true,
-    domain: "ecommerce-backend-9nv3.onrender.com",
+    // domain: "ecommerce-backend-9nv3.onrender.com",
   };
 
   res.status(statusCode).cookie("USERTOKEN", token, options).json({

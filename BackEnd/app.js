@@ -9,8 +9,8 @@ const path = require("path");
 
 app.use(
   cors({
-    origin: "https://fullstack-ecommerce.netlify.app",
-    // origin: "http://localhost:3000",
+    // origin: "https://fullstack-ecommerce.netlify.app",
+    origin: "http://localhost:3000",
     credentials: true,
   })
 );

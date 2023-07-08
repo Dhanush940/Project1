@@ -23,8 +23,8 @@ const ProfileSidebar = ({ setActive, active }) => {
       .get(`${server}/user/logout`, { withCredentials: true })
       .then((res) => {
         toast.success(res.data.message);
-        window.location.reload(true);
         navigate("/login");
+        window.location.reload(true);
       })
       .catch((error) => {
         console.log(error.response.data.message);
@@ -127,7 +127,7 @@ const ProfileSidebar = ({ setActive, active }) => {
         </span>
       </div>
       {user && user?.role === "Admin" && (
-        <Link to="/admin/dashboard">
+        <Link to="/admin-dashboard">
           <div className="flex items-center cursor-pointer w-full mb-8">
             <MdOutlineAdminPanelSettings size={20} />
             <span className={`pl-3 800px:block hidden`}>Admin Dashboard</span>

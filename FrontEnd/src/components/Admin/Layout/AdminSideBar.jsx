@@ -11,10 +11,10 @@ import { AiOutlineSetting } from "react-icons/ai";
 
 const AdminSideBar = ({ active }) => {
   return (
-    <div className="w-full h-[90vh] bg-white shadow-sm overflow-y-scroll sticky top-0 left-0 z-10">
+    <div className="w-full h-[90vh] bg-white shadow-sm overflow-y-scroll sticky top-0 left-0 z-10 flex  flex-col justify-between">
       {/* single item */}
-      <div className="w-full flex items-center p-4">
-        <Link to="/admin/dashboard" className="w-full flex items-center">
+      <div className="w-full flex  items-center p-4">
+        <Link to="/admin-dashboard" className="w-full flex items-center">
           <RxDashboard
             size={30}
             color={`${active === 1 ? "crimson" : "#555"}`}
@@ -46,7 +46,7 @@ const AdminSideBar = ({ active }) => {
       </div>
 
       <div className="w-full flex items-center p-4">
-        <Link to="/admin-sellers" className="w-full flex items-center">
+        <Link to="/admin-sellers" className="w-full flex  items-center">
           <GrWorkshop
             size={30}
             color={`${active === 3 ? "crimson" : "#555"}`}

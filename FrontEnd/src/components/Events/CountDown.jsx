@@ -22,7 +22,7 @@ const CountDown = ({ data }) => {
         .catch((err) => {});
     }
     return () => clearTimeout(timer);
-  }, []);
+  });
 
   function calculateTimeLeft() {
     const difference = +new Date(data?.Finish_Date) - +new Date();

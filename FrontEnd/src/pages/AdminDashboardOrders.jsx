@@ -75,7 +75,8 @@ const AdminDashboardOrders = () => {
           </div>
 
           <div className="w-full min-h-[45vh] pt-5 rounded flex justify-center">
-            <div className="w-[97%] flex justify-center">
+            <div className="w-[97%] flex flex-col justify-center">
+              <h3 className="text-[22px] font-Poppins pb-2">All Orders</h3>
               <DataGrid
                 rows={row}
                 columns={columns}

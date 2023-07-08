@@ -48,7 +48,8 @@ router.post("/create-shop", upload.single("file"), async (req, res, next) => {
 
     const activationToken = createActivationToken(seller);
 
-    const activationUrl = `https://fullstack-ecommerce.netlify.app/shop/activation/${activationToken}`;
+    // const activationUrl = `https://fullstack-ecommerce.netlify.app/shop/activation/${activationToken}`;
+    const activationUrl = `http://localhost:3000/shop/activation/${activationToken}`;
 
     try {
       await sendMail({
@@ -213,6 +214,10 @@ router.get(
       res.cookie("SHOPTOKEN", null, {
         expires: new Date(Date.now()),
         httpOnly: true,
+        domain: "",
+        path: "/",
+        sameSite: "none",
+        secure: true,
       });
       res.status(201).json({
         success: true,

@@ -3,13 +3,14 @@ const path = require("path");
 const User = require("../model/user");
 const router = express.Router();
 const { upload } = require("../multer");
-const ErrorHandler = require("../BackEnd/utils/ErrorHandler");
-const catchAsyncErrors = require("../BackEnd/middleware/catchAsyncErrors");
+// BackEnd / utils / ErrorHandler;
+const ErrorHandler = require("../utils/ErrorHandler");
+const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const fs = require("fs");
 const jwt = require("jsonwebtoken");
 const sendMail = require("../utils/sendMail");
 const sendJWTToken = require("../utils/sendJWTToken");
-const { isAuthenticated, isAdmin } = require("../BackEnd/middleware/auth");
+const { isAuthenticated, isAdmin } = require("../middleware/auth");
 
 router.post("/create-user", upload.single("file"), async (req, res, next) => {
   try {
@@ -46,7 +47,8 @@ router.post("/create-user", upload.single("file"), async (req, res, next) => {
 
     const activationToken = createActivationToken(user);
 
-    const activationUrl = `https://fullstack-ecommerce.netlify.app/activation/${activationToken}`;
+    // const activationUrl = `https://fullstack-ecommerce.netlify.app/activation/${activationToken}`;
+    const activationUrl = `http://localhost:3000/activation/${activationToken}`;
 
     try {
       await sendMail({
@@ -178,9 +180,10 @@ router.get(
       res.cookie("USERTOKEN", null, {
         expires: new Date(Date.now()),
         httpOnly: true,
-        domain: "ecommerce-backend-9nv3.onrender.com",
+        domain: "",
         path: "/",
         sameSite: "none",
+        secure: true,
       });
       res.status(201).json({
         success: true,

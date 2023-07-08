@@ -5,7 +5,7 @@ import EventCard from "./EventCard";
 
 const Events = () => {
   const { allEvents, isLoading } = useSelector((state) => state.events);
-  console.log(allEvents);
+  // console.log(allEvents);
 
   return (
     <div>
@@ -19,7 +19,7 @@ const Events = () => {
             {allEvents?.length !== 0 && (
               <EventCard data={allEvents && allEvents[0]} />
             )}
-            <h1 className="mb-3">
+            <h1 className="text-center mb-3 800px:text-left">
               {allEvents?.length === 0 && "No Events Present"}
             </h1>
           </div>
