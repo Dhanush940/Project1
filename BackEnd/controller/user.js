@@ -47,8 +47,8 @@ router.post("/create-user", upload.single("file"), async (req, res, next) => {
 
     const activationToken = createActivationToken(user);
 
-    // const activationUrl = `https://fullstack-ecommerce.netlify.app/activation/${activationToken}`;
-    const activationUrl = `http://localhost:3000/activation/${activationToken}`;
+    const activationUrl = `https://fullstack-ecommerce.netlify.app/activation/${activationToken}`;
+    // const activationUrl = `http://localhost:3000/activation/${activationToken}`;
 
     try {
       await sendMail({
