@@ -21,6 +21,11 @@ const FeaturedProduct = () => {
                 ))}
             </>
           )}
+          {allProducts && allProducts.length === 0 ? (
+            <h1 className="text-center mb-3 800px:text-left">
+              No products Found!
+            </h1>
+          ) : null}
         </div>
       </div>
     </div>

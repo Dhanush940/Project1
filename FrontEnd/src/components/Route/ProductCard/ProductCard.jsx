@@ -73,8 +73,14 @@ const ProductCard = ({ data, isEvent }) => {
                 : `/product/${data._id}`
             }`}
           >
-            <img
+            {/* multer */}
+            {/* <img
               src={`${backend_url}${data.images && data.images[0]}`}
+              alt=""
+              className="w-full h-[170px] object-contain"
+            /> */}
+            <img
+              src={`${data.images && data.images[0]?.url}`}
               alt=""
               className="w-full h-[170px] object-contain"
             />

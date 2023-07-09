@@ -23,7 +23,7 @@ const ProductDetails = ({ data }) => {
   const { wishlist } = useSelector((state) => state.wishlist);
   const { cart } = useSelector((state) => state.cart);
   const { user, isAuthenticated } = useSelector((state) => state.user);
-  const { allProducts } = useSelector((state) => state.products);
+  const { products } = useSelector((state) => state.products);
   const [count, setCount] = useState(1);
   const [click, setClick] = useState(false);
   const [select, setSelect] = useState(0);
@@ -74,13 +74,13 @@ const ProductDetails = ({ data }) => {
   };
 
   const totalReviewsLength =
-    allProducts &&
-    allProducts.reduce((acc, product) => acc + product.reviews?.length, 0);
+    products &&
+    products.reduce((acc, product) => acc + product.reviews?.length, 0);
 
-  // console.log(allProducts);
+  // console.log(products);
   const totalRatings =
-    allProducts &&
-    allProducts?.reduce(
+    products &&
+    products?.reduce(
       (acc, product) =>
         acc + product?.reviews?.reduce((sum, review) => sum + review.rating, 0),
       0
@@ -119,8 +119,14 @@ const ProductDetails = ({ data }) => {
           <div className="w-full py-5">
             <div className="block w-full 800px:flex">
               <div className="w-full 800px:w-[50%]">
-                <img
+                {/* multer */}
+                {/* <img
                   src={`${backend_url}${data && data.images[select]}`}
+                  alt=""
+                  className="w-[80%]"
+                /> */}
+                <img
+                  src={`${data && data.images[select]?.url}`}
                   alt=""
                   className="w-[80%]"
                 />
@@ -132,8 +138,15 @@ const ProductDetails = ({ data }) => {
                           select === index ? "border" : "null"
                         } cursor-pointer`}
                       >
-                        <img
+                        {/* multer */}
+                        {/* <img
                           src={`${backend_url}${i}`}
+                          alt=""
+                          className="h-[200px] overflow-hidden mr-3 mt-3"
+                          onClick={() => setSelect(index)}
+                        /> */}
+                        <img
+                          src={`${i?.url}`}
                           alt=""
                           className="h-[200px] overflow-hidden mr-3 mt-3"
                           onClick={() => setSelect(index)}
@@ -207,8 +220,14 @@ const ProductDetails = ({ data }) => {
                 </div>
                 <div className="flex items-center pt-8">
                   <Link to={`/shop/preview/${data?.shop._id}`}>
-                    <img
+                    {/* multer */}
+                    {/* <img
                       src={`${backend_url}${data?.shop?.avatar}`}
+                      alt=""
+                      className="w-[50px] h-[50px] rounded-full mr-2"
+                    /> */}
+                    <img
+                      src={`${data?.shop?.avatar?.url}`}
                       alt=""
                       className="w-[50px] h-[50px] rounded-full mr-2"
                     />
@@ -237,7 +256,7 @@ const ProductDetails = ({ data }) => {
           </div>
           <ProductDetailsInfo
             data={data}
-            products={allProducts}
+            products={products}
             totalReviewsLength={totalReviewsLength}
             averageRating={averageRating}
           />
@@ -314,8 +333,14 @@ const ProductDetailsInfo = ({
             data.reviews?.map((item, index) => (
               <div className="w-full flex my-2">
                 {/* {console.log(item)} */}
-                <img
+                {/* multer */}
+                {/* <img
                   src={`${backend_url}/${item.user.avatar}`}
+                  alt=""
+                  className="w-[50px] h-[50px] rounded-full"
+                /> */}
+                <img
+                  src={`${item.user.avatar?.url}`}
                   alt=""
                   className="w-[50px] h-[50px] rounded-full"
                 />
@@ -342,8 +367,14 @@ const ProductDetailsInfo = ({
           <div className="w-full 800px:w-[50%]">
             <Link to={`/shop/preview/${data.shop._id}`}>
               <div className="flex items-center">
-                <img
+                {/* multer */}
+                {/* <img
                   src={`${backend_url}${data?.shop?.avatar}`}
+                  className="w-[50px] h-[50px] rounded-full"
+                  alt=""
+                /> */}
+                <img
+                  src={`${data?.shop?.avatar?.url}`}
                   className="w-[50px] h-[50px] rounded-full"
                   alt=""
                 />

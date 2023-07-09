@@ -33,17 +33,34 @@ const CreateProduct = () => {
     }
   }, [dispatch, error, success]);
 
-  const handleImageChange = (e) => {
-    e.preventDefault();
-    // console.log(e.target.files);
+  // const handleImageChange = (e) => {
+  //   e.preventDefault();
+  //   // console.log(e.target.files);
 
-    let files = Array.from(e.target.files);
-    // console.log(files);
-    // files.forEach((image) => console.log(typeof image, image));
-    setImages((prevImages) => [...prevImages, ...files]);
-  };
+  //   let files = Array.from(e.target.files);
+  //   // console.log(files);
+  //   // files.forEach((image) => console.log(typeof image, image));
+  //   setImages((prevImages) => [...prevImages, ...files]);
+  // };
 
   // console.log(images);
+
+  const handleImageChange = (e) => {
+    const files = Array.from(e.target.files);
+
+    setImages([]);
+
+    files.forEach((file) => {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        if (reader.readyState === 2) {
+          setImages((old) => [...old, reader.result]);
+        }
+      };
+      reader.readAsDataURL(file);
+    });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -54,9 +71,9 @@ const CreateProduct = () => {
       newForm.append("images", image);
     });
     // console.log("Images:", newForm);
-    for (const pair of newForm.entries()) {
-      console.log(`${pair[0]}, ${pair[1].name}`);
-    }
+    // for (const pair of newForm.entries()) {
+    //   console.log(`${pair[0]}, ${pair[1].name}`);
+    // }
     newForm.append("name", name);
     newForm.append("description", description);
     newForm.append("category", category);
@@ -65,10 +82,23 @@ const CreateProduct = () => {
     newForm.append("discountPrice", discountPrice);
     newForm.append("stock", stock);
     newForm.append("shopId", seller._id);
-    for (const pair of newForm.entries()) {
-      console.log(`${pair[0]}, ${pair[1]}`);
-    }
-    dispatch(createProduct(newForm));
+    // for (const pair of newForm.entries()) {
+    //   console.log(`${pair[0]}, ${pair[1]}`);
+    // }
+    // dispatch(createProduct(newForm));
+    dispatch(
+      createProduct({
+        name,
+        description,
+        category,
+        tags,
+        originalPrice,
+        discountPrice,
+        stock,
+        shopId: seller._id,
+        images,
+      })
+    );
   };
 
   return (
@@ -203,7 +233,9 @@ const CreateProduct = () => {
             {images &&
               images.map((i) => (
                 <img
-                  src={URL.createObjectURL(i)}
+                  // multer
+                  // src={URL.createObjectURL(i)}
+                  src={i}
                   key={i}
                   alt=""
                   className="h-[120px] w-[120px] object-cover m-2"

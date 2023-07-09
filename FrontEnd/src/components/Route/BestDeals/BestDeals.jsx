@@ -12,6 +12,7 @@ const BestDeals = () => {
     const firstFive = sortedData && sortedData.slice(0, 5);
     setData(firstFive);
   }, [allProducts]);
+  // console.log("Data is :", data);
 
   return (
     <div>
@@ -26,6 +27,11 @@ const BestDeals = () => {
                 data.map((i, index) => <ProductCard data={i} key={index} />)}
             </>
           )}
+          {data && data.length === 0 ? (
+            <h1 className="text-center mb-3 800px:text-left">
+              No products Found!
+            </h1>
+          ) : null}
         </div>
       </div>
     </div>

@@ -5,7 +5,8 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 
 const cors = require("cors");
-const path = require("path");
+//multer
+// const path = require("path");
 
 app.use(
   cors({
@@ -17,7 +18,14 @@ app.use(
 
 app.use(express.json());
 app.use(cookieParser());
-app.use("/", express.static("./uploads"));
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+    // limit: "50mb",
+  })
+);
+//multer
+// app.use("/", express.static("./uploads"));
 app.use("/test", (req, res) => {
   res.send("Hello World!");
 });
@@ -26,13 +34,6 @@ app.use("/test", (req, res) => {
 // app.use("/test", (req, res) => {
 //   res.send("Hello world!");
 // });
-
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
-    // limit: "50mb"
-  })
-);
 
 // config
 if (process.env.NODE_ENV !== "PRODUCTION") {

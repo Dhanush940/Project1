@@ -31,6 +31,11 @@ const BestSellingPage = () => {
               {data &&
                 data.map((i, index) => <ProductCard data={i} key={index} />)}
             </div>
+            {data && data.length === 0 ? (
+              <h1 className="text-center w-full pb-[100px] text-[20px]">
+                No products Found!
+              </h1>
+            ) : null}
           </div>
           <Footer />
         </div>

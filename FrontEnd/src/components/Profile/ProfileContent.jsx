@@ -48,28 +48,55 @@ const ProfileContent = ({ active }) => {
     dispatch(updateUserInformation(name, email, phoneNumber, password));
   };
 
+  // const handleImage = async (e) => {
+  //   const file = e.target.files[0];
+  //   setAvatar(file);
+
+  //   const formData = new FormData();
+
+  //   formData.append("image", e.target.files[0]);
+
+  //   await axios
+  //     .put(`${server}/user/update-avatar`, formData, {
+  //       headers: {
+  //         "Content-Type": "multipart/form-data",
+  //       },
+  //       withCredentials: true,
+  //     })
+  //     .then((response) => {
+  //       dispatch(loadUser());
+  //       toast.success("avatar updated successfully!");
+  //     })
+  //     .catch((error) => {
+  //       toast.error(error);
+  //     });
+  // };
+
   const handleImage = async (e) => {
-    const file = e.target.files[0];
-    setAvatar(file);
+    const reader = new FileReader();
 
-    const formData = new FormData();
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setAvatar(reader.result);
+        axios
+          .put(
+            `${server}/user/update-avatar`,
+            { avatar: reader.result },
+            {
+              withCredentials: true,
+            }
+          )
+          .then((response) => {
+            dispatch(loadUser());
+            toast.success("avatar updated successfully!");
+          })
+          .catch((error) => {
+            toast.error(error);
+          });
+      }
+    };
 
-    formData.append("image", e.target.files[0]);
-
-    await axios
-      .put(`${server}/user/update-avatar`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        withCredentials: true,
-      })
-      .then((response) => {
-        dispatch(loadUser());
-        toast.success("avatar updated successfully!");
-      })
-      .catch((error) => {
-        toast.error(error);
-      });
+    reader.readAsDataURL(e.target.files[0]);
   };
   return (
     <div className="w-full">
@@ -78,8 +105,14 @@ const ProfileContent = ({ active }) => {
         <>
           <div className="flex justify-center w-full">
             <div className="relative">
-              <img
+              {/* multer */}
+              {/* <img
                 src={`${backend_url}${user?.avatar}`}
+                className="w-[150px] h-[150px] rounded-full object-cover border-[3px] border-[#3ad132]"
+                alt=""
+              /> */}
+              <img
+                src={`${user?.avatar?.url}`}
                 className="w-[150px] h-[150px] rounded-full object-cover border-[3px] border-[#3ad132]"
                 alt=""
               />
@@ -579,38 +612,38 @@ const ChangePassword = () => {
   );
 };
 
-const PaymentMethod = () => {
-  return (
-    <div className="w-full px-5">
-      <div className="flex w-full items-center justify-between ">
-        <h1 className="text-[25px] font-[600] text-[#000000ba] pb-2  ">
-          Payment Methods
-        </h1>
-        <div className={`${styles.button} !rounded-md`}>
-          <span className="text-[#fff] ">Add New</span>
-        </div>
-      </div>
-      <br />
-      <div className="w-full bg-white h-[70px] rounded-[4px] flex items-center px-3 shadow justify-between pr-10  ">
-        <div className="flex items-center ">
-          <img
-            src="https://bonik-react.vercel.app/assets/images/payment-methods/Visa.svg"
-            alt=""
-          />
-          <h5 className="pl-5 font-[600] ">Dhanush Kunamaneni</h5>
-        </div>
+// const PaymentMethod = () => {
+//   return (
+//     <div className="w-full px-5">
+//       <div className="flex w-full items-center justify-between ">
+//         <h1 className="text-[25px] font-[600] text-[#000000ba] pb-2  ">
+//           Payment Methods
+//         </h1>
+//         <div className={`${styles.button} !rounded-md`}>
+//           <span className="text-[#fff] ">Add New</span>
+//         </div>
+//       </div>
+//       <br />
+//       <div className="w-full bg-white h-[70px] rounded-[4px] flex items-center px-3 shadow justify-between pr-10  ">
+//         <div className="flex items-center ">
+//           <img
+//             src="https://bonik-react.vercel.app/assets/images/payment-methods/Visa.svg"
+//             alt=""
+//           />
+//           <h5 className="pl-5 font-[600] ">Dhanush Kunamaneni</h5>
+//         </div>
 
-        <div className="pl-8 flex items-center ">
-          <h6>1234 **** **** ****</h6>
-          <h5 className="pl-6">08/2024</h5>
-        </div>
-        <div className="min-w-[10%] flex items-center justify-between pl-8 ">
-          <AiOutlineDelete size={25} className="cursor-pointer" />
-        </div>
-      </div>
-    </div>
-  );
-};
+//         <div className="pl-8 flex items-center ">
+//           <h6>1234 **** **** ****</h6>
+//           <h5 className="pl-6">08/2024</h5>
+//         </div>
+//         <div className="min-w-[10%] flex items-center justify-between pl-8 ">
+//           <AiOutlineDelete size={25} className="cursor-pointer" />
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
 
 const Address = () => {
   const [open, setOpen] = useState(false);

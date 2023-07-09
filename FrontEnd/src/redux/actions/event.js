@@ -2,22 +2,17 @@ import axios from "axios";
 import { server } from "../../server";
 
 // create event
-export const createevent = (newForm) => async (dispatch) => {
+export const createevent = (data) => async (dispatch) => {
   try {
     dispatch({
       type: "eventCreateRequest",
     });
 
-    const config = { headers: { "Content-Type": "multipart/form-data" } };
-
-    const { data } = await axios.post(
-      `${server}/event/create-event`,
-      newForm,
-      config
-    );
+    const { d } = await axios.post(`${server}/event/create-event`, data);
+    console.log(d);
     dispatch({
       type: "eventCreateSuccess",
-      payload: data.event,
+      payload: d.event,
     });
   } catch (error) {
     dispatch({
@@ -42,7 +37,7 @@ export const getAllEventsShop = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "getAlleventsShopFailed",
-      payload: error.response,
+      payload: error.response?.data?.message,
     });
   }
 };
@@ -68,7 +63,7 @@ export const deleteEvent = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "deleteeventFailed",
-      payload: error.response.data.message,
+      payload: error.response?.data?.message,
     });
   }
 };
@@ -88,7 +83,7 @@ export const getAllEvents = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: "getAlleventsFailed",
-      payload: error.response,
+      payload: error.response?.data?.message,
     });
   }
 };

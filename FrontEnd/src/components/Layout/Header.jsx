@@ -85,8 +85,14 @@ const Header = ({ activeHeading }) => {
                     return (
                       <Link to={`/product/${i._id}`}>
                         <div className="w-full flex items-start-py-3">
-                          <img
+                          {/* multer */}
+                          {/* <img
                             src={`${backend_url}${i.images[0]}`}
+                            alt=""
+                            className="w-[40px] h-[40px] mr-[10px]"
+                          /> */}
+                          <img
+                            src={`${i.images[0]?.url}`}
                             alt=""
                             className="w-[40px] h-[40px] mr-[10px]"
                           />
@@ -176,8 +182,14 @@ const Header = ({ activeHeading }) => {
               <div className="relative cursor-pointer mr-[15px]">
                 {isAuthenticated ? (
                   <Link to="/profile">
-                    <img
+                    {/* multer */}
+                    {/* <img
                       src={`${backend_url}${user?.avatar}`}
+                      className="w-[35px] h-[35px] rounded-full"
+                      alt=""
+                    /> */}
+                    <img
+                      src={`${user?.avatar?.url}`}
                       className="w-[35px] h-[35px] rounded-full"
                       alt=""
                     />
@@ -283,10 +295,16 @@ const Header = ({ activeHeading }) => {
                         return (
                           <Link to={`/product/${i._id}`}>
                             <div className="w-full flex items-start-py-3">
-                              <img
+                              {/* multer */}
+                              {/* <img
                                 src={`${backend_url}${i.images[0]}`}
                                 alt=""
                                 className="w-[40px] h-[40px] mr-[10px]"
+                              /> */}
+                              <img
+                                src={i.image_Url[0]?.url}
+                                alt=""
+                                className="w-[50px] mr-2"
                               />
                               <h1>{i.name}</h1>
                             </div>
@@ -314,8 +332,14 @@ const Header = ({ activeHeading }) => {
                 {isAuthenticated ? (
                   <div>
                     <Link to="/profile">
-                      <img
+                      {/* multer */}
+                      {/* <img
                         src={`${backend_url}${user.avatar}`}
+                        alt=""
+                        className="w-[60px] h-[60px] rounded-full border-[3px] border-[#0eae88]"
+                      /> */}
+                      <img
+                        src={`${user.avatar?.url}`}
                         alt=""
                         className="w-[60px] h-[60px] rounded-full border-[3px] border-[#0eae88]"
                       />
