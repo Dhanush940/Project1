@@ -6,6 +6,7 @@ const Product = require("../model/product");
 const Order = require("../model/order");
 const Shop = require("../model/shop");
 // const { upload } = require("../multer");
+const cloudinary = require("cloudinary");
 const ErrorHandler = require("../utils/ErrorHandler");
 // const fs = require("fs");
 
@@ -45,8 +46,11 @@ router.post(
   "/create-product",
   catchAsyncErrors(async (req, res, next) => {
     try {
+      // console.log("In roduct js controller");
+      // console.log("req body is :", req.body);
       const shopId = req.body.shopId;
       const shop = await Shop.findById(shopId);
+
       if (!shop) {
         return next(new ErrorHandler("Shop Id is invalid!", 400));
       } else {
@@ -59,16 +63,20 @@ router.post(
         }
 
         const imagesLinks = [];
+        // console.log("Images:", images);
+        // console.log(images.length);
 
         for (let i = 0; i < images.length; i++) {
           const result = await cloudinary.v2.uploader.upload(images[i], {
             folder: "products",
           });
+          // console.log("Result is ", result);
 
           imagesLinks.push({
             public_id: result.public_id,
             url: result.secure_url,
           });
+          // console.log("Imagelinks ", imagesLinks);
         }
 
         const productData = req.body;
@@ -76,6 +84,7 @@ router.post(
         productData.shop = shop;
 
         const product = await Product.create(productData);
+        // console.log("Product is :", product);
 
         res.status(201).json({
           success: true,
@@ -149,18 +158,21 @@ router.delete(
   catchAsyncErrors(async (req, res, next) => {
     try {
       const product = await Product.findById(req.params.id);
+      console.log("Product is :", product);
 
       if (!product) {
         return next(new ErrorHandler("Product is not found with this id", 404));
       }
 
-      for (let i = 0; 1 < product.images.length; i++) {
+      for (let i = 0; i < product.images.length; i++) {
         const result = await cloudinary.v2.uploader.destroy(
           product.images[i].public_id
         );
+        console.log("result is :", result);
       }
 
-      await product.remove();
+      await Product.findByIdAndDelete(req.params.id);
+      console.log("product removed");
 
       res.status(201).json({
         success: true,

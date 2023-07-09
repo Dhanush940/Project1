@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { deleteEvent, getAllEventsShop } from "../../redux/actions/event";
 import Loader from "../Layout/Loader";
+import { TbTruckDelivery } from "react-icons/tb";
 
 const AllEvents = () => {
   const { events, isLoading } = useSelector((state) => state.events);
@@ -19,7 +20,7 @@ const AllEvents = () => {
 
   const handleDelete = (id) => {
     dispatch(deleteEvent(id));
-    window.location.reload();
+    window.location.reload(true);
   };
 
   const columns = [

@@ -44,6 +44,8 @@ router.post(
   "/create-event",
   catchAsyncErrors(async (req, res, next) => {
     try {
+      // console.log("In event js controller");
+      // console.log("Req body is:", req.body);
       const shopId = req.body.shopId;
       const shop = await Shop.findById(shopId);
       if (!shop) {
@@ -73,8 +75,11 @@ router.post(
         const productData = req.body;
         productData.images = imagesLinks;
         productData.shop = shop;
+        // console.log("ProductData is ", productData);
 
         const event = await Event.create(productData);
+        // console.log(event);
+        // console.log("Product created");
 
         res.status(201).json({
           success: true,
@@ -159,18 +164,20 @@ router.delete(
   catchAsyncErrors(async (req, res, next) => {
     try {
       const event = await Event.findById(req.params.id);
+      // console.log(event);
 
-      if (!product) {
-        return next(new ErrorHandler("Product is not found with this id", 404));
+      if (!event) {
+        return next(new ErrorHandler("event is not found with this id", 404));
       }
 
-      for (let i = 0; 1 < product.images.length; i++) {
+      for (let i = 0; 1 < event.images.length; i++) {
         const result = await cloudinary.v2.uploader.destroy(
           event.images[i].public_id
         );
       }
 
-      await event.remove();
+      await Event.findByIdAndDelete(req.params.id);
+      // await event.remove()
 
       res.status(201).json({
         success: true,

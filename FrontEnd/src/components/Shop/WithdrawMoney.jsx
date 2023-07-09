@@ -83,7 +83,12 @@ const WithdrawMoney = () => {
   };
 
   const withdrawHandler = async () => {
-    if (withdrawAmount < 50 || withdrawAmount > availableBalance) {
+    if (
+      withdrawAmount.valueOf < 50 ||
+      withdrawAmount.valueOf > availableBalance.valueOf
+    ) {
+      console.log(withdrawAmount, availableBalance);
+      console.log(typeof withdrawAmount, typeof availableBalance);
       toast.error("You can't withdraw this amount!");
     } else {
       const amount = withdrawAmount;

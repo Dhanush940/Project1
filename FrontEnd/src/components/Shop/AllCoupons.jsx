@@ -9,6 +9,7 @@ import styles from "../../styles/styles";
 import Loader from "../Layout/Loader";
 import { server } from "../../server";
 import { toast } from "react-toastify";
+import { getAllProductsShop } from "../../redux/actions/product";
 
 const AllCoupons = () => {
   const [open, setOpen] = useState(false);
@@ -37,6 +38,7 @@ const AllCoupons = () => {
       .catch((error) => {
         setIsLoading(false);
       });
+    dispatch(getAllProductsShop(seller._id));
   }, []);
 
   const handleDelete = async (id) => {
@@ -142,7 +144,7 @@ const AllCoupons = () => {
           />
           {open && (
             <div className="fixed top-0 left-0 w-full h-screen bg-[#00000062] z-[20000] flex items-center justify-center">
-              <div className="w-[90%] 800px:w-[40%] h-[90vh] bg-white rounded-md shadow p-4">
+              <div className="w-[90%] 800px:w-[40%] h-[90vh] bg-white rounded-md shadow p-4 overflow-y-scroll">
                 <div className="w-full flex justify-end">
                   <RxCross1
                     size={30}

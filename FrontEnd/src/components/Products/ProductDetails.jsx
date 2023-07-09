@@ -66,6 +66,12 @@ const ProductDetails = ({ data }) => {
       if (data.stock < 1) {
         toast.error("Product stock limited!");
       } else {
+        if (count > data.stock) {
+          toast.error(
+            `You can choose a maximum of ${data.stock} pieces of this product`
+          );
+          return;
+        }
         const cartData = { ...data, qty: count };
         dispatch(addTocart(cartData));
         toast.success("Item added to cart successfully!");

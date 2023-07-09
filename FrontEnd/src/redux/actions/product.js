@@ -20,6 +20,8 @@ export const createProduct =
         type: "productCreateRequest",
       });
 
+      // console.log("In product js actions");
+
       const { data } = await axios.post(
         `${server}/product/create-product`,
         name,
@@ -32,14 +34,15 @@ export const createProduct =
         shopId,
         images
       );
+      // console.log("Data from product js actions 35", data);
       dispatch({
         type: "productCreateSuccess",
-        payload: data.product,
+        payload: data?.product,
       });
     } catch (error) {
       dispatch({
         type: "productCreateFail",
-        payload: error.response.data.message,
+        payload: error?.response?.data?.message,
       });
     }
   };

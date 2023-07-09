@@ -16,11 +16,11 @@ const AllProducts = () => {
 
   useEffect(() => {
     dispatch(getAllProductsShop(seller._id));
-  }, []);
+  }, [dispatch]);
 
   const handleDelete = (id) => {
     dispatch(deleteProduct(id));
-    window.location.reload();
+    window.location.reload(true);
   };
 
   const columns = [
@@ -29,7 +29,7 @@ const AllProducts = () => {
       field: "name",
       headerName: "Name",
       minWidth: 180,
-      flex: 1,
+      flex: 1.4,
     },
     {
       field: "price",
@@ -60,7 +60,6 @@ const AllProducts = () => {
       type: "number",
       sortable: false,
       renderCell: (params) => {
-        console.log(params);
         return (
           <>
             <Link to={`/product/${params.id}`}>

@@ -136,7 +136,7 @@ export const deleteUserAddress = (id) => async (dispatch) => {
     dispatch({
       type: "deleteUserAddressSuccess",
       payload: {
-        successMessage: "User deleted successfully!",
+        successMessage: "User address deleted successfully!",
         user: data.user,
       },
     });
