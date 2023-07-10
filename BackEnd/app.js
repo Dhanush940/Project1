@@ -10,7 +10,7 @@ const cors = require("cors");
 
 app.use(
   cors({
-    origin: "https://fullstack-ecommerce.netlify.app",
+    origin: "https://ubuysite.netlify.app",
     // origin: "http://localhost:3000",
     credentials: true,
   })
